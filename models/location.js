@@ -11,7 +11,7 @@ location = new Schema({
       type: String
     },
     coordinates: [Number]
-  }
+  },
   createdUser: {
     _id: mongoose.Schema.Types.ObjectId
   }
@@ -22,4 +22,4 @@ minute(location, {
 });
 
 Locations = mongoose.model('location', location);
-model.exports = Locations;
+module.exports = Locations;
