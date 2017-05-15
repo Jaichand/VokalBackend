@@ -19,11 +19,12 @@ UserSchema = new Schema({
         validate({
           validator: 'isEmail'
         })
-      ],
-      password:{
-        type: String
-      }
-    }
+      ]
+  },
+  password:{
+    type: String,
+    required: false
+  }
 });
 Users = mongoose.model('User', UserSchema);
 module.exports = Users;

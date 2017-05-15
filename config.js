@@ -1,6 +1,6 @@
 module.exports = {
   mongo: {
-    url: 'mongodb://localhost:27017',
+    url: 'mongodb://localhost:27017/',
     options: {},
     dbName: 'vokal_assign'
   },
