@@ -1,7 +1,7 @@
 var jwt = require('jsonwebtoken');
 var express = require('express');
 var User = require('../models/user.js');
-var location = require('../models/location.js');
+var Locations = require('../models/location.js');
 var config = require('../config');
 var Router = express.Router();
 app = express()
@@ -69,8 +69,18 @@ Router.use(function(req, res, next){
 });
 
 Router.get('/', function(req,res){
+  console.log("token in get Call", req.decoded);
  res.json({ message: 'Welcome to the coolest API on earth!' });
 });
+
+Router.get('/loggedInUser', function(req, res) {
+  var userId = req.decoded._doc._id
+  User.findOne({_id: userId}, function (err, user) {
+    if (err)
+     return
+    res.status(200).json({user: user});
+  });
+})
 
 Router.get('/user', function(req, res){
   User.find({_id: req.query._id}, function(err, user){
@@ -84,6 +94,30 @@ Router.get('/user', function(req, res){
 
 Router.post('/saveLocation', function(req, res) {
   console.log("saveLocation Post", req.body);
-  name = req.body.name;
+  var location = {
+    name: req.body.name,
+    location: req.body.location,
+    createdUser: {_id: req.decoded._doc._id}
+  };
+  if (!location.createdUser._id) {
+    console.log("PLease give createdUser");
+    return
+  }
+  searchedLocation = new Locations(location);
+  searchedLocation.save(function (err, location) {
+    res.status(200).json({location})
+  });
 });
+
+Router.get('/allSearchedLocation', function (req, res) {
+  console.log("allSearchedLocation");
+  var userId = req.decoded._doc._id;
+  Locations.find({'createdUser._id': userId}, function (err, locations) {
+    if (err) {
+      console.log("Error while fetching location");
+      res.status(500).json({Error: err});
+    }
+    res.status(200).json({locations: locations});
+  });
+})
 module.exports = Router;

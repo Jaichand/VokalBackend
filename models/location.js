@@ -8,7 +8,7 @@ location = new Schema({
   },
   location: {
     type:{
-      type: String
+      type: [String]
     },
     coordinates: [Number]
   },
