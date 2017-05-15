@@ -81,4 +81,9 @@ Router.get('/user', function(req, res){
     res.json(user);
   })
 });
+
+Router.post('/saveLocation', function(req, res) {
+  console.log("saveLocation Post", req.body);
+  name = req.body.name;
+});
 module.exports = Router;
