@@ -12,6 +12,7 @@
     "mongoose": "^4.9.9",
     "mongoose-minute": "^1.0.0",
     "mongoose-validator": "^1.2.6",
-    "morgan": "^1.8.1"
+    "morgan": "^1.8.1",
+    "cors": "2.7.1"
   }
 }

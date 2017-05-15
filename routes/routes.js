@@ -82,7 +82,7 @@ Router.get('/loggedInUser', function(req, res) {
   });
 })
 
-Router.get('/user', function(req, res){
+Router.get('/user/:id', function(req, res){
   User.find({_id: req.query._id}, function(err, user){
     if (err){
       console.log("Error while getting user", err);
