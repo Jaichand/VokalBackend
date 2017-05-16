@@ -9,10 +9,12 @@ var User = require('./models/user.js');
 var location = require('./models/location.js');
 var port = process.env.PORT || 8080
 var routes = require('./routes/routes.js')
+var cors = require('cors');
 var mongoUrl = config.mongo.url + config.mongo.dbName;
 console.log("mongoUrl", mongoUrl);
 mongoose.connect(mongoUrl);
 app.set('superSecret', config.secret);
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
