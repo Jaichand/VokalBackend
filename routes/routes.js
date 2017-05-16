@@ -105,6 +105,10 @@ Router.post('/saveLocation', function(req, res) {
   }
   searchedLocation = new Locations(location);
   searchedLocation.save(function (err, location) {
+    if (err) {
+      console.log("Error while saving location", err);
+      return
+    }
     res.status(200).json({location})
   });
 });
