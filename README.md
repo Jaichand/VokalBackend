@@ -1,1 +1,3 @@
 # VokalBackend
+
+npm install
